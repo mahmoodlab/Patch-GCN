@@ -183,7 +183,7 @@ class PatchGCN_Surv(torch.nn.Module):
         self.resample = resample
 
         if self.resample > 0:
-            self.fc = nn.Sequential(*[nn.Dropout(self.resample), nn.Linear(1024, 256), nn.ReLU(), nn.Dropout(0.25)])
+            self.fc = nn.Sequential(*[nn.Dropout(self.resample), nn.Linear(1024, 128), nn.ReLU(), nn.Dropout(0.25)])
         else:
             self.fc = nn.Sequential(*[nn.Linear(1024, 128), nn.ReLU(), nn.Dropout(0.25)])
 
