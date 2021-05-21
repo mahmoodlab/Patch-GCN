@@ -46,7 +46,7 @@ DATA_ROOT_DIR is the base directory of all datasets / cancer type(e.g. the direc
 <img src='Fig2_Heatmap.png' width='1000px' align='center' />
 
 ### 3. Training-Validation Splits
-For evaluating the algorithm's performance, we randomly partitioned each dataset using 5-fold cross-validation. Splits for each cancer type are found in the [splits/5foldcv](https://github.com) folder, which each contain `splits_{k}.csv` for k = 1 to 5. In each `splits_{k}.csv`, the first column corresponds to the TCGA Case IDs used for training, and the second column corresponds to the TCGA Case IDs used for validation. Alternatively, one could define their own splits, however, the files would need to be defined in this format. The dataset loader for using these train-val splits are defined in the [get_split_from_df](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L173) function in the [Generic_WSI_Survival_Dataset](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L20) class (inherited from the PyTorch Dataset class).
+For evaluating the algorithm's performance, we randomly partitioned each dataset using 5-fold cross-validation (at the patient level). Splits for each cancer type are found in the [splits/5foldcv](https://github.com) folder, which each contain `splits_{k}.csv` for k = 1 to 5. In each `splits_{k}.csv`, the first column corresponds to the TCGA Case IDs used for training, and the second column corresponds to the TCGA Case IDs used for validation. Alternatively, one could define their own splits, however, the files would need to be defined in this format. The dataset loader for using these train-val splits are defined in the [get_split_from_df](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L173) function in the [Generic_WSI_Survival_Dataset](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L20) class (inherited from the PyTorch Dataset class).
 
 
 ### 4. Running Experiments
@@ -55,3 +55,7 @@ To run experiments using the networks defined in this repository, experiments ca
 CUDA_VISIBLE_DEVICES=<DEVICE ID> python main.py --which_splits <SPLIT FOLDER PATH> --split_dir <SPLITS FOR CANCER TYPE> --mode <WHICH MODALITY> --model_type <WHICH MODEL>
 ```
 Commands for all experiments / models can be found in the [Commands.md](https://github.com/miccai2021anon/2410/blob/master/docs/Commands.md) file.
+
+
+### 5. Attention Heatmaps
+Attention heatmaps can be created via saving the attention scores from global attention pooling, applying `cv2.COLORMAP_MAGMA` in OpenCV (or your favorite colormap) to the attention scores to create a colored patch, then blending and overlaying the colored patch with the original H&E patch using OpenSlide. For models that compute attention scores, attention scores can be saved during the [Forward pass](https://github.com/miccai2021anon/2410/blob/10a4c61386f15cb68b0f4664ac473d976114035d/models/model_set_mil.py#L107).
