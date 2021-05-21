@@ -59,3 +59,6 @@ Commands for all experiments / models can be found in the [Commands.md](https://
 
 ### 5. Attention Heatmaps
 Attention heatmaps can be created via saving the attention scores from global attention pooling, applying `cv2.COLORMAP_MAGMA` in OpenCV (or your favorite colormap) to the attention scores to create a colored patch, then blending and overlaying the colored patch with the original H&E patch using OpenSlide. For models that compute attention scores, attention scores can be saved during the [Forward pass](https://github.com/miccai2021anon/2410/blob/10a4c61386f15cb68b0f4664ac473d976114035d/models/model_set_mil.py#L107).
+
+### 6. Example Model Input for Patch-GCN ( + Speed Benchmark)
+To inspect underneath the hood of Patch-GCN and see how inputs are organized (as well as speed in loading large graphs), see the [following Jupyter Notebook](https://github.com/miccai2021anon/2410/blob/master/Inference%20Benchmark.ipynb).
