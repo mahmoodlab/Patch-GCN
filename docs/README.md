@@ -1,6 +1,7 @@
 Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks
 ===========
 
+<img src='Fig1_PatchGCN.jpg' width='1000px' align='center' />
 ## Pre-requisites:
 * Linux (Tested on Ubuntu 18.04) 
 * NVIDIA GPU (Tested on Nvidia GeForce RTX 2080 Ti x 16) with CUDA 11.0 and cuDNN 7.5
@@ -12,7 +13,7 @@ Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using 
 To download diagnostic WSIs (formatted as .svs files), please refer to the [NIH Genomic Data Commons Data Portal](https://portal.gdc.cancer.gov/) and the [cBioPortal](https://www.cbioportal.org/). WSIs for each cancer type can be downloaded using the [GDC Data Transfer Tool](https://docs.gdc.cancer.gov/Data_Transfer_Tool/Users_Guide/Data_Download_and_Upload/).
 
 #### 2. Processing Whole Slide Images + Graph Construction
-To process WSIs, first, the tissthen ue regions in each biopsy slide are segmented using Otsu's Segmentation on a downsampled WSI using OpenSlide. The 256 x 256 patches without spatial overlapping are extracted from the segmented tissue regions at the desired magnification. Consequently, a pretrained truncated ResNet50 is used to encode raw image patches into 1024-dim feature vectors, which we then save as .pt files for each WSI. For permutation-invariant set-based approaches, the extracted features then serve as input (in a .pt file) to the network. For graph-based approaches, we additionally use k-nearest neighbors (k=8) to connect edges between feature vectors (w.r.t. to either latent feature similarity or spatial coordinate similarity). The following folder structure is assumed for the extracted features vectors:    
+To process WSIs, first, the tissthen ue regions in each biopsy slide are segmented using Otsu's Segmentation on a downsampled WSI using OpenSlide. The 256 x 256 patches without spatial overlapping are extracted from the segmented tissue regions at the desired magnification. Consequently, a pretrained truncated ResNet50 is used to encode raw image patches into 1024-dim feature vectors, which we then save as `.pt` files for each WSI. For permutation-invariant set-based approaches, the extracted features then serve as input (in a `.pt` file) to the network. For graph-based approaches, we additionally use k-nearest neighbors (`k=8`) to connect edges between feature vectors (w.r.t. to either latent feature similarity or spatial coordinate similarity). The following folder structure is assumed for the extracted features vectors:    
 ```bash
 DATA_ROOT_DIR/
     └──TCGA_BLCA/
@@ -39,12 +40,15 @@ DATA_ROOT_DIR/
 ```
 DATA_ROOT_DIR is the base directory of all datasets / cancer type(e.g. the directory to your SSD). Within DATA_ROOT_DIR, each folder contains a list of .pt files for that dataset / cancer type.
 
+<img src='Fig2_Heatmap.png' width='1000px' align='center' />
+
 #### 3. Training-Validation Splits
-For evaluating the algorithm's performance, we randomly partitioned each dataset using 5-fold cross-validation. Splits for each cancer type are found in the [splits/5foldcv](https://github.com) folder, which each contain **splits_{k}.csv** for k = 1 to 5. In each **splits_{k}.csv**, the first column corresponds to the TCGA Case IDs used for training, and the second column corresponds to the TCGA Case IDs used for validation. Alternatively, one could define their own splits, however, the files would need to be defined in this format. The dataset loader for using these train-val splits are defined in the [**get_split_from_df**](https://github.com) function in the [**Generic_WSI_Survival_Dataset**](https://github.com) class (inherited from the PyTorch Dataset class).
+For evaluating the algorithm's performance, we randomly partitioned each dataset using 5-fold cross-validation. Splits for each cancer type are found in the [splits/5foldcv](https://github.com) folder, which each contain `splits_{k}.csv` for k = 1 to 5. In each `splits_{k}.csv`, the first column corresponds to the TCGA Case IDs used for training, and the second column corresponds to the TCGA Case IDs used for validation. Alternatively, one could define their own splits, however, the files would need to be defined in this format. The dataset loader for using these train-val splits are defined in the [get_split_from_df](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L173) function in the [Generic_WSI_Survival_Dataset](https://github.com/miccai2021anon/2410/blob/f9d0befe164d52d1f5ad7217618b99d261511162/datasets/dataset_survival.py#L20) class (inherited from the PyTorch Dataset class).
+
 
 #### 4. Running Experiments
 To run experiments using the networks defined in this repository, experiments can be run using the following generic command-line:
 ```shell
 CUDA_VISIBLE_DEVICES=<DEVICE ID> python main.py --which_splits <SPLIT FOLDER PATH> --split_dir <SPLITS FOR CANCER TYPE> --mode <WHICH MODALITY> --model_type <WHICH MODEL>
 ```
-Commands for all experiments / models can be found in the [Commands.md](https://github.com) file.
+Commands for all experiments / models can be found in the [Commands.md](https://github.com/miccai2021anon/2410/blob/master/docs/Commands.md) file.
