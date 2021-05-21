@@ -2,17 +2,20 @@ Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using 
 ===========
 
 <img src='Fig1_PatchGCN.jpg' width='1000px' align='center' />
-## Pre-requisites:
+
+
+### Installation Guide
+#### Pre-requisites:
 * Linux (Tested on Ubuntu 18.04) 
 * NVIDIA GPU (Tested on Nvidia GeForce RTX 2080 Ti x 16) with CUDA 11.0 and cuDNN 7.5
-* Python (3.7.7), h5py (2.10.0), matplotlib (3.1.1), numpy (1.18.1), opencv-python (4.1.1), openslide-python (1.1.1), openslide (3.4.1), pandas (1.1.3), pillow (7.0.0), PyTorch (1.6.0), scikit-learn (0.22.1), scipy (1.4.1), tensorflow (1.13.1), tensorboardx (1.9), torchvision (0.7.0), captum (0.2.0), shap (0.35.0)
+* Python (3.7.7), h5py (2.10.0), matplotlib (3.1.1), numpy (1.18.1), opencv-python (4.1.1), openslide-python (1.1.1), openslide (3.4.1), pandas (1.1.3), pillow (7.0.0), PyTorch (1.6.0), scikit-learn (0.22.1), scipy (1.4.1), tensorflow (1.13.1), tensorboardx (1.9), torchvision (0.7.0), captum (0.2.0), shap (0.35.0), torch_geometric (1.6.3)
 
-### Installation Guide for Linux (using anaconda)
-
-#### 1. Downloading TCGA Data
+#### Conda Installation:
+To install the dependencies for this project via conda, see the [installation guide here](https://github.com/miccai2021anon/2410/blob/master/docs/INSTALLATION.md).
+### 1. Downloading TCGA Data
 To download diagnostic WSIs (formatted as .svs files), please refer to the [NIH Genomic Data Commons Data Portal](https://portal.gdc.cancer.gov/) and the [cBioPortal](https://www.cbioportal.org/). WSIs for each cancer type can be downloaded using the [GDC Data Transfer Tool](https://docs.gdc.cancer.gov/Data_Transfer_Tool/Users_Guide/Data_Download_and_Upload/).
 
-#### 2. Processing Whole Slide Images + Graph Construction
+### 2. Processing Whole Slide Images + Graph Construction
 To process WSIs, first, the tissthen ue regions in each biopsy slide are segmented using Otsu's Segmentation on a downsampled WSI using OpenSlide. The 256 x 256 patches without spatial overlapping are extracted from the segmented tissue regions at the desired magnification. Consequently, a pretrained truncated ResNet50 is used to encode raw image patches into 1024-dim feature vectors, which we then save as `.pt` files for each WSI. For permutation-invariant set-based approaches, the extracted features then serve as input (in a `.pt` file) to the network. For graph-based approaches, we additionally use k-nearest neighbors (`k=8`) to connect edges between feature vectors (w.r.t. to either latent feature similarity or spatial coordinate similarity). The following folder structure is assumed for the extracted features vectors:    
 ```bash
 DATA_ROOT_DIR/
