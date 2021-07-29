@@ -1,7 +1,26 @@
 Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks
 ===========
 
+#### MICCAI 2021 | [[arXiv]](https://arxiv.org/abs/2107.13048)
+
+© [Mahmood Lab](http://www.mahmoodlab.org) - This code is made available under the GPLv3 License and is available for non-commercial academic purposes. 
+
+If you find our work useful in your research or if you use parts of this code please consider citing our paper:
+```
+@article{chen2020pathomic,
+  title={Pathomic fusion: an integrated framework for fusing histopathology and genomic features for cancer diagnosis and prognosis},
+  author={Chen, Richard J and Lu, Ming Y and Wang, Jingwen and Williamson, Drew FK and Rodig, Scott J and Lindeman, Neal I and Mahmood, Faisal},
+  journal={IEEE Transactions on Medical Imaging},
+  year={2020},
+  publisher={IEEE}
+}
+```
+
+### Overview
+In recent progress in computational pathology, permutation-invariant set-basead deep learning algorithms (e.g. - Attention MIL, CLAM) have demoninated weakly-supervised learning tasks such as cancer diagnosis and mutation prediction. However, cancer prognostication is a challenging task in computational pathology that requires context-aware representations of histology features to adequately infer patient survival. Instead of formulating WSIs as permutation-invariant sets / bags, we formulate WSIs as graphs with patch features as nodes connected via k-NN by their (x,y)-coordinate. Following WSI-Graph construction, we use Patch-GCN, a context-aware, spatially-resolved patch-based graph convolutional network that hierarchically aggregates instance-level histology features to model local- and global-level topological structures in the tumor microenvironment - similar to a 2D point cloud.
+
 <img src='Fig1_PatchGCN.jpg' width='1000px' align='center' />
+
 
 
 ### Installation Guide
