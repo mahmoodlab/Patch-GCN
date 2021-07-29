@@ -1,18 +1,17 @@
 Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks
 ===========
 
-#### MICCAI 2021 | [[arXiv]](https://arxiv.org/abs/2107.13048)
+#### Appearing in MICCAI 2021 | [[arXiv]](https://arxiv.org/abs/2107.13048)
 
 © [Mahmood Lab](http://www.mahmoodlab.org) - This code is made available under the GPLv3 License and is available for non-commercial academic purposes. 
 
 If you find our work useful in your research or if you use parts of this code please consider citing our paper:
 ```
-@article{chen2020pathomic,
-  title={Pathomic fusion: an integrated framework for fusing histopathology and genomic features for cancer diagnosis and prognosis},
-  author={Chen, Richard J and Lu, Ming Y and Wang, Jingwen and Williamson, Drew FK and Rodig, Scott J and Lindeman, Neal I and Mahmood, Faisal},
-  journal={IEEE Transactions on Medical Imaging},
-  year={2020},
-  publisher={IEEE}
+@article{chen2021whole,
+  title={Whole slide images are 2D point clouds: context-aware survival prediction using patch-based graph convolutional networks},
+  author={Chen, Richard J and Lu, Ming Y and Shaban, Muhammad and Chen, Chengkuan and Chen, Tiffany Y and Williamson, Drew FK and Mahmood, Faisal},
+  journal={arXiv preprint arXiv:1512.02167},
+  year={2021}
 }
 ```
 
