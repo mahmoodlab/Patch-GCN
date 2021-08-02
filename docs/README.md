@@ -8,9 +8,9 @@ Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using 
 If you find our work useful in your research or if you use parts of this code please consider citing our paper:
 ```
 @article{chen2021whole,
-  title={Whole slide images are 2D point clouds: context-aware survival prediction using patch-based graph convolutional networks},
+  title={Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks},
   author={Chen, Richard J and Lu, Ming Y and Shaban, Muhammad and Chen, Chengkuan and Chen, Tiffany Y and Williamson, Drew FK and Mahmood, Faisal},
-  journal={arXiv preprint arXiv:1512.02167},
+  journal={arXiv preprint arXiv:2107.13048},
   year={2021}
 }
 ```
