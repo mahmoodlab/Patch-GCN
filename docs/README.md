@@ -1,17 +1,21 @@
 Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks
 ===========
 
-#### Appearing in MICCAI 2021 | [[arXiv]](https://arxiv.org/abs/2107.13048)
+#### [[MICCAI 2021]](https://rdcu.be/cymao) | [[arXiv]](https://arxiv.org/abs/2107.13048)
 
 © [Mahmood Lab](http://www.mahmoodlab.org) - This code is made available under the GPLv3 License and is available for non-commercial academic purposes. 
 
 If you find our work useful in your research or if you use parts of this code please consider citing our paper:
 ```
-@article{chen2021whole,
+@incollection{chen2021whole,
   title={Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks},
   author={Chen, Richard J and Lu, Ming Y and Shaban, Muhammad and Chen, Chengkuan and Chen, Tiffany Y and Williamson, Drew FK and Mahmood, Faisal},
-  journal={arXiv preprint arXiv:2107.13048},
-  year={2021}
+  doi = {10.1007/978-3-030-87237-3_33},
+  url = {https://doi.org/10.1007/978-3-030-87237-3_33},
+  publisher = {Springer International Publishing},
+  pages = {339--349},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention {\textendash} {MICCAI} 2021},
+  year = {2021}
 }
 ```
 
