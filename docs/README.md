@@ -1,7 +1,7 @@
 Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using Patch-based Graph Convolutional Networks
 ===========
 
-#### [[MICCAI 2021]](https://rdcu.be/cymao) | [[arXiv]](https://arxiv.org/abs/2107.13048)
+#### [[MICCAI 2021]](https://rdcu.be/cymao) [[arXiv]](https://arxiv.org/abs/2107.13048) [[Talk]](https://www.youtube.com/watch?v=KHv7ccs9FAI)
 
 © [Mahmood Lab](http://www.mahmoodlab.org) - This code is made available under the GPLv3 License and is available for non-commercial academic purposes. 
 
