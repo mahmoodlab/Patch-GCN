@@ -192,9 +192,6 @@ if 'survival' in args.task:
 
   dataset = Generic_MIL_Survival_Dataset(csv_path = './%s/%s_all_clean.csv.zip' % (args.dataset_path, combined_study),
                                            mode = args.mode,
-                                           ignore_rnaseq = args.ignore_rnaseq,
-                                           pca_comp = args.pca_comp,
-                                           apply_sig = args.apply_sig,
                                            data_dir= os.path.join(args.data_root_dir, study_dir),
                                            shuffle = False, 
                                            seed = args.seed, 
