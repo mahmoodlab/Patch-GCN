@@ -49,27 +49,24 @@ def collate_features(batch):
 
 def collate_MIL_survival(batch):
     img = torch.cat([item[0] for item in batch], dim = 0)
-    meta = torch.cat([item[1] for item in batch], dim = 0).type(torch.FloatTensor)
-    label = torch.LongTensor([item[2] for item in batch])
-    event_time = np.array([item[3] for item in batch])
-    c = torch.FloatTensor([item[4] for item in batch])
-    return [img, meta, label, event_time, c]
+    label = torch.LongTensor([item[1] for item in batch])
+    event_time = np.array([item[2] for item in batch])
+    c = torch.FloatTensor([item[3] for item in batch])
+    return [img, label, event_time, c]
 
 def collate_MIL_survival_cluster(batch):
     img = torch.cat([item[0] for item in batch], dim = 0)
     cluster_ids = torch.cat([item[1] for item in batch], dim = 0).type(torch.LongTensor)
-    meta = torch.cat([item[2] for item in batch], dim = 0).type(torch.FloatTensor)
-    label = torch.LongTensor([item[3] for item in batch])
-    event_time = np.array([item[4] for item in batch])
-    c = torch.FloatTensor([item[5] for item in batch])
-    return [img, cluster_ids, meta, label, event_time, c]
+    label = torch.LongTensor([item[2] for item in batch])
+    event_time = np.array([item[3] for item in batch])
+    c = torch.FloatTensor([item[4] for item in batch])
+    return [img, cluster_ids, label, event_time, c]
 
 def collate_MIL_survival_graph(batch):
     elem = batch[0]
     elem_type = type(elem)        
     transposed = zip(*batch)
     return [samples[0] if isinstance(samples[0], torch_geometric.data.Batch) else default_collate(samples) for samples in transposed]
-
 
 
 def get_simple_loader(dataset, batch_size=1):
@@ -82,6 +79,7 @@ def get_split_loader(split_dataset, training = False, testing = False, weighted 
         return either the validation loader or training loader 
     """
     if mode == 'graph':
+        print("asdf")
         collate = collate_MIL_survival_graph
     elif mode == 'cluster':
         collate = collate_MIL_survival_cluster
@@ -322,9 +320,6 @@ def get_custom_exp_code(args):
     else:
         raise NotImplementedError
 
-    if 'small' in args.model_size_wsi:
-        param_code += 'sm'
-
     if args.resample > 0:
         param_code += '_resample'
 
@@ -345,10 +340,6 @@ def get_custom_exp_code(args):
 
     if args.gc != 1:
         param_code += '_gc%s' % str(args.gc)
-
-    if args.apply_sigfeats:
-        param_code += '_sig'
-        dataset_path += '_sig'
 
     args.exp_code = exp_code + '_' + param_code
     args.param_code = param_code

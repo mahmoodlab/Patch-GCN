@@ -196,9 +196,14 @@ class Generic_WSI_Survival_Dataset(Dataset):
         return train_split, val_split
 
 
+    def get_list(self, ids):
+        return self.slide_data['slide_id'][ids]
+
+    def getlabel(self, ids):
+        return self.slide_data['label'][ids]
+
     def __getitem__(self, idx):
         return None
-
 
 class Generic_MIL_Survival_Dataset(Generic_WSI_Survival_Dataset):
     def __init__(self, data_dir, mode: str='path', **kwargs):
@@ -216,7 +221,7 @@ class Generic_MIL_Survival_Dataset(Generic_WSI_Survival_Dataset):
         event_time = self.slide_data[self.label_col][idx]
         c = self.slide_data['censorship'][idx]
         slide_ids = self.patient_dict[case_id]
-        meta = torch.tensor(self.meta[idx])
+
 
         if type(self.data_dir) == dict:
             source = self.slide_data['oncotree_code'][idx]
@@ -233,7 +238,7 @@ class Generic_MIL_Survival_Dataset(Generic_WSI_Survival_Dataset):
                         wsi_bag = torch.load(wsi_path)
                         path_features.append(wsi_bag)
                     path_features = torch.cat(path_features, dim=0)
-                    return (path_features, meta, label, event_time, c)
+                    return (path_features, label, event_time, c)
 
                 elif self.mode == 'cluster':
                     path_features = []
@@ -245,7 +250,7 @@ class Generic_MIL_Survival_Dataset(Generic_WSI_Survival_Dataset):
                         cluster_ids.extend(self.fname2ids[slide_id[:-4]+'.pt'])
                     path_features = torch.cat(path_features, dim=0)
                     cluster_ids = torch.Tensor(cluster_ids)
-                    return (path_features, cluster_ids, meta, label, event_time, c)
+                    return (path_features, cluster_ids, label, event_time, c)
 
                 elif self.mode == 'graph':
                     path_features = []
@@ -256,7 +261,7 @@ class Generic_MIL_Survival_Dataset(Generic_WSI_Survival_Dataset):
                         path_features.append(wsi_bag)
 
                     path_features = BatchWSI.from_data_list(path_features, update_cat_dims={'edge_latent': 1})
-                    return (path_features, meta, label, event_time, c)
+                    return (path_features, label, event_time, c)
 
                 else:
                     raise NotImplementedError('Mode [%s] not implemented.' % self.mode)

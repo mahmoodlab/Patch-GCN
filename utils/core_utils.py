@@ -129,6 +129,8 @@ def train(datasets: tuple, cur: int, args: Namespace):
     else:
         raise NotImplementedError
 
+    reg_fn = None
+
     print('\nInit Model...', end=' ')
     model_dict = {"dropout": args.drop_out, 'n_classes': args.n_classes}
     if args.model_type == 'deepset':
@@ -204,6 +206,11 @@ def train_loop_survival(epoch, model, loader, optimizer, n_classes, writer=None,
     all_event_times = np.zeros((len(loader)))
 
     for batch_idx, (data_WSI, label, event_time, c) in enumerate(loader):
+
+        if isinstance(data_WSI, torch_geometric.data.Batch):
+            if data_WSI.x.shape[0] > 100_000:
+                continue
+
         data_WSI = data_WSI.to(device)
         label = label.to(device)
         c = c.to(device)
@@ -260,6 +267,11 @@ def validate_survival(cur, epoch, model, loader, n_classes, early_stopping=None,
     all_event_times = np.zeros((len(loader)))
 
     for batch_idx, (data_WSI, label, event_time, c) in enumerate(loader):
+        
+        if isinstance(data_WSI, torch_geometric.data.Batch):
+            if data_WSI.x.shape[0] > 100_000:
+                continue
+
         data_WSI = data_WSI.to(device)
         label = label.to(device)
         c = c.to(device)
@@ -316,6 +328,11 @@ def summary_survival(model, loader, n_classes):
     patient_results = {}
 
     for batch_idx, (data_WSI, label, event_time, c) in enumerate(loader):
+        
+        if isinstance(data_WSI, torch_geometric.data.Batch):
+            if data_WSI.x.shape[0] > 100_000:
+                continue
+
         data_WSI = data_WSI.to(device)
         label = label.to(device)
         
