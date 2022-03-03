@@ -283,9 +283,10 @@ class Generic_Split(Generic_MIL_Survival_Dataset):
         self.slide_cls_ids = [[] for i in range(self.num_classes)]
         for i in range(self.num_classes):
             self.slide_cls_ids[i] = np.where(self.slide_data['label'] == i)[0]
-
-        with open(os.path.join(data_dir, 'fast_cluster_ids.pkl'), 'rb') as handle:
-            self.fname2ids = pickle.load(handle)
+        
+        if os.path.isfile(os.path.join(data_dir, 'fast_cluster_ids.pkl')):
+            with open(os.path.join(data_dir, 'fast_cluster_ids.pkl'), 'rb') as handle:
+                self.fname2ids = pickle.load(handle)
 
         def series_intersection(s1, s2):
             return pd.Series(list(set(s1) & set(s2)))
