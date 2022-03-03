@@ -22,12 +22,10 @@ Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using 
   year = {2021}
 }
 ```
-**Summary:** We formulate WSIs as graphs with patch features as nodes connected via k-NN by their (x,y)-coordinate (similar to a point cloud). Adapting message passing via GCNs on this graph structure would enable learning context-aware embeddings (in contrast with instance-level features that are simply pooled in MIL frameworks.
 </details>
 
+**Summary:** We formulate WSIs as graphs with patch features as nodes connected via k-NN by their (x,y)-coordinate (similar to a point cloud). Adapting message passing via GCNs on this graph structure would enable learning context-aware embeddings (in contrast with instance-level features that are simply pooled in MIL frameworks.
 <img src='Fig1_PatchGCN.jpg' width='1000px' align='center' />
-
-
 
 ## Installation Guide
 ### Pre-requisites:
