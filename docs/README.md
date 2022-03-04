@@ -87,6 +87,10 @@ Attention heatmaps can be created via saving the attention scores from global at
 ## Example Model Input for Patch-GCN ( + Speed Benchmark)
 To inspect underneath the hood of Patch-GCN and see how inputs are organized (as well as speed in loading large graphs), see the [following Jupyter Notebook](https://github.com/miccai2021anon/2410/blob/master/Inference%20Benchmark.ipynb).
 
+## Issues
+- Please open new threads or report issues directly (for urgent blockers) to richardchen@g.harvard.edu.
+- Immediate response to minor issues may not be available.
+
 
 ## License & Usage 
 If you find our work useful in your research, please consider citing our paper at:
