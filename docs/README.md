@@ -27,6 +27,10 @@ Whole Slide Images are 2D Point Clouds: Context-Aware Survival Prediction using 
 **Summary:** We formulate WSIs as graphs with patch features as nodes connected via k-NN by their (x,y)-coordinate (similar to a point cloud). Adapting message passing via GCNs on this graph structure would enable learning context-aware embeddings (in contrast with instance-level features that are simply pooled in MIL frameworks).
 <img src='Fig1_PatchGCN.jpg' width='1000px' align='center' />
 
+## Updates
+Please follow this GitHub for more updates.
+- [X] 6/26/2022: At the time of running the experiments for Patch-GCN, torch_geometric (1.6.3) was used. There have been some reported issues (via email) in which for newer torch_geometric versions, the loss function for Patch-GCN bcomes unstable for other tasks (e.g. - classification). I have managed to circumvent this issue on my own via removing the final [nn.Dropout function](https://github.com/mahmoodlab/Patch-GCN/blob/e2de8c3dc10e7de2b3f8c1ce1d4a243f2fee7dc5/models/model_graph_mil.py#L57) in the model definition. Still not clear why making this improves classification tasks (in my experimentation), but hopefully this should mitigate any issues for your experiments.
+
 ## Installation Guide
 ### Pre-requisites:
 * Linux (Tested on Ubuntu 18.04) 
@@ -69,10 +73,6 @@ DATA_ROOT_DIR is the base directory of all datasets / cancer type(e.g. the direc
 
 <img src='Fig2_Heatmap.png' width='1000px' align='center' />
 
-## Updates
-Please follow this GitHub for more updates.
-- [ ] 6/21/2022: Add classification + survival training scaffold code.
-- [X] Note: At the time of running the experiments for Patch-GCN, torch_geometric (1.6.3) was used. There have been some reported issues (via email) in which for newer torch_geometric versions, the loss function for Patch-GCN bcomes unstable for other tasks (e.g. - classification). I have managed to circumvent this issue on my own via removing the final [nn.Dropout function](https://github.com/mahmoodlab/Patch-GCN/blob/e2de8c3dc10e7de2b3f8c1ce1d4a243f2fee7dc5/models/model_graph_mil.py#L57) in the model definition. Still not clear why making this improves classification tasks (in my experimentation), but hopefully this should mitigate any issues for your experiments.
 
 
 ## Training-Validation Splits
